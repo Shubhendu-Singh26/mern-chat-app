@@ -18,12 +18,14 @@ const __dirname = path.resolve();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(
-  cors({
-    origin: ["http://localhost:5173", "http://localhost:5174"],
-    credentials: true,
-  })
-);
+
+const corsOptions = {
+  origin: "https://mern-chat-app-git-main-shubhendu-singhs-projects.vercel.app", // Your frontend URL
+  credentials: true, // Allow cookies & sessions
+  methods: ["GET", "POST", "PUT", "DELETE"],
+};
+
+app.use(cors(corsOptions));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
